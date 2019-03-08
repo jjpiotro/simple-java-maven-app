@@ -13,13 +13,13 @@ pipeline{
             }
             post{
                 always{
-                    echo "========always========"
+                    echo "========Build always========"
                 }
                 success{
-                    echo "========A executed successfully========"
+                    echo "========Build executed successfully========"
                 }
                 failure{
-                    echo "========A execution failed========"
+                    echo "========Build execution failed========"
                 }
             }
         }
@@ -38,6 +38,24 @@ pipeline{
                 }
                 failure{
                     echo "====++++Test execution failed++++===="
+                }
+        
+            }
+        }
+        stage("Deliver"){
+            steps{
+                echo "====++++executing Deliver++++===="
+                sh './jenkins/scripts/deliver.sh'
+            }
+            post{
+                always{
+                    echo "====++++always++++===="
+                }
+                success{
+                    echo "====++++Deliver executed succesfully++++===="
+                }
+                failure{
+                    echo "====++++Deliver execution failed++++===="
                 }
         
             }
