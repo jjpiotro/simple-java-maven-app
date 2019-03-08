@@ -23,6 +23,25 @@ pipeline{
                 }
             }
         }
+        stage("Test"){
+            steps{
+                echo "====++++executing Test++++===="
+                sh 'mvn test'
+            }
+            post{
+                always{
+                    echo "====++++always++++===="
+                    junit 'target/surefire-reports/*.xml'
+                }
+                success{
+                    echo "====++++Test executed succesfully++++===="
+                }
+                failure{
+                    echo "====++++Test execution failed++++===="
+                }
+        
+            }
+        }
     }
     post{
         always{
